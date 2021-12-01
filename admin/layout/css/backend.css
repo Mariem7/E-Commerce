@@ -1,3 +1,7 @@
+body{
+    background-color: #F4F4F4;
+    font-size:16px;
+}
 /*Start Login form*/
 .login{
     width: 300px;
@@ -26,4 +30,32 @@
     border-radius:0 !important;
 }
 
+.nav> li >a,
+.navbar-brand{
+    padding: 15px 12px;
+}
+
+.navbar-brand{
+    font-size: 1em;
+}
+
+.navbar-inverse .navbar-nav>.open> a,
+.navbar-inverse .navbar-nav>.open>a:focus, 
+.navbar-inverse .navbar-nav>.open>a:hover {
+    background-color: #8d24f0;
+    transition-duration: 0.2s;
+}
+
+.dropdown-menu{
+    background-color: #e4e4e4;
+}
+
+.dropdown-menu >li > a{
+    padding: 10px 15px;
+}
+
+.dropdown-menu >li > a:focus,
+.dropdown-menu >li > a:hover{
+    background-color: rgb(204, 204, 204);
+}
 /*End Bootstrap edits*/

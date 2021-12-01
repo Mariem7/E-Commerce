@@ -12,7 +12,7 @@ $lang= 'includes/languages/'; //Language Directory
 include $lang . 'english.php';
 include $tpl . 'header.php';
 
-//Include navbar on all pages except the one with £noNavbar variable
-include $tpl . 'navbar.php';
+//Include navbar on all pages except the one with noNavbar variable
+if (!isset($noNavbar)) { include $tpl . 'navbar.php';}
 
 ?>

@@ -1,10 +1,12 @@
 
 <?php 
 session_start();
+
 $noNavbar ='';
 if (isset($_SESSION['username'])){
     header('Location: dashboard.php');  //redirect to dashboard page
 }
+
 include 'init.php';
 
 
@@ -20,6 +22,7 @@ $stmt = $con->prepare("select username , password from users where username  = ?
 $stmt->execute(array($username,$hashedPass));
 $count = $stmt->rowCount();
 // if count > 0 this means the database contains a record about this username 
+
 if ($count > 0 ) {
 $_SESSION['username'] =$username; //register session name
 header('Location: dashboard.php'); 

@@ -1,61 +1,42 @@
 body{
-    background-color: #F4F4F4;
+    background-color: #ffffff;
     font-size:16px;
 }
-/*Start Login form*/
-.login{
-    width: 300px;
-    margin : 100px auto ;
+
+/* Start the Login Style*/
+.logo-sign-up{
+    width:150px;
+    padding-top:10px;
+    padding-bottom: 50px;
 }
-.login h2 {
-    color : #888;
-}
-.login input {
-    margin-bottom: 10px;
-}
-.login .form-control {
-    background-color: #EAEAEA;
-}
-.login .btn {
-    background-color: #008dde;
-}
-/*End Login form*/
+
+/* End the Login Style*/
+
 
 /*Start Bootstrap edits*/
+.logo{
+    width: 2.4em;
+    margin-right: 50px;
+}
+
 .navbar{
     border-radius:0 !important;
 }
 
-.navbar-inverse{
-    border-radius:0 !important;
+.navbar-nav{
+    margin-top:0px;
+    margin-bottom: 0px;
 }
 
-.nav> li >a,
-.navbar-brand{
-    padding: 15px 12px;
+.nav-link{
+    margin-right: 50px;
 }
 
-.navbar-brand{
-    font-size: 1em;
-}
-
-.navbar-inverse .navbar-nav>.open> a,
-.navbar-inverse .navbar-nav>.open>a:focus, 
-.navbar-inverse .navbar-nav>.open>a:hover {
-    background-color: #8d24f0;
-    transition-duration: 0.2s;
+.nav-link:hover{
+    color: #f75959 !important;
 }
 
 .dropdown-menu{
-    background-color: #e4e4e4;
-}
-
-.dropdown-menu >li > a{
-    padding: 10px 15px;
-}
-
-.dropdown-menu >li > a:focus,
-.dropdown-menu >li > a:hover{
-    background-color: rgb(204, 204, 204);
+    border: none !important;
 }
 /*End Bootstrap edits*/

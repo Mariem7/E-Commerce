@@ -16,14 +16,6 @@ try {
 catch(PDOException $e){
     echo "<script>console.log('Failed to connect to database');</script>" ;
 
-
 }
-
-
-
-
-
-
-
 
 ?>

@@ -40,56 +40,125 @@
         }
     }
 ?>
+<div class="index">
+	<div class="container shadow p-3 mb-5 bg-white rounded" id="container">
+		<div class="form-container sign-up-container">
+			<!--Form for creating new account-->
+			<form class="form1" action="#">
+				<h2>Create Account</h2>
 
-<section class="ftco-section">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-12 col-lg-10">
-				<div class="wrap d-md-flex">
-					<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
-						<div class="text w-100">
-							<h2>Welcome to</h2>
-                            <img class="logo-sign-up" src='images/LOGO-Sing-UP.png' alt='not found'/>
-							<p>Don't have an account?</p>
-							<a href="#" class="mb-4 btn btn-white btn-outline-white">Sign Up</a>
-						</div>
-			      </div>
-						<div class="login-wrap p-4 p-lg-5">
-			      	<div class="d-flex">
-			      		<div class="w-100">
-			      			<h3 class="mb-4">Sign In</h3>
-			      		</div>
-			      	</div>
-						<form class="signin-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" >
-			      	<div class="form-group mb-3">
-			      		<label class="label" for="name">Username</label>
-			      		<input type="text" class="form-control" placeholder="Username" name="user" required>
-			      	</div>
-		            <div class="form-group mb-3">
-		            	<label class="label" for="password">Password</label>
-		              <input type="password" class="form-control" placeholder="Password" name="pass" required>
-		            </div>
-		            <div class="form-group">
-		            	<button type="submit" value="Login" class="form-control btn btn-primary submit px-3">Sign In</button>
-		            </div>
-		            <div class="form-group d-md-flex">
-		            	<div class="w-50 text-left">
-			            	<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-								<input type="checkbox" checked>
-								    <span class="checkmark"></span>
-							</label>
-						</div>
-						<div class="w-50 text-md-right">
-							<a href="#">Forgot Password</a>
-						</div>
-		            </div>
-		          </form>
-		        </div>
-		      </div>
+				<div class="input-group flex-nowrap">
+				<span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
+				<input type="text" name="user" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
+				</div>
+
+				<div class="input-group flex-nowrap">
+				<span class="input-group-text" id="addon-wrapping"><i class="fas fa-envelope"></i></span>
+				<input type="email" name="email" class="form-control" placeholder="Email" aria-label="Password" aria-describedby="addon-wrapping">
+				</div>
+
+				<div class="input-group flex-nowrap">
+				<span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
+				<input name="password" type="password" value="" class="input form-control" id="password1" placeholder="password" required="true" aria-label="password" aria-describedby="addon-wrapping" />
+					<span class="input-group-text" onclick="password_show_hide2();">
+						<i class="fas fa-eye" id="show_eye1"></i>
+						<i class="fas fa-eye-slash d-none" id="hide_eye1"></i>	
+					</span>
+			    </div>
+				
+				<br>
+				<button class="buttont1">Sign Up</button>
+
+			</form>
+		</div>
+		<!--form to sign in -->
+		<div class="form-container sign-in-container">
+			<form class="form1" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" >
+				<h2>Sign in</h2>
+
+				<div class="input-group flex-nowrap">
+				<span class="input-group-text" id="addon-wrapping"><i class="fas fa-user"></i></span>
+				<input type="text" name="user" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+				</div>
+
+				<div class="input-group flex-nowrap">
+				<span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock"></i></span>
+				<input name="pass" type="password" value="" class="input form-control" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="addon-wrapping" />
+					<span class="input-group-text" onclick="password_show_hide();">
+						<i class="fas fa-eye" id="show_eye"></i>
+						<i class="fas fa-eye-slash d-none" id="hide_eye"></i>	
+					</span>
+			    </div>
+
+				<a class="link" href="#">Forgot your password?</a>
+				<button class="buttont1" type="submit" value="Login">Sign In</button>
+			</form>
+		</div>
+
+		<!--form to sign up -->
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Welcome to</h1>
+					<img class="logo-sign-up" src='images/LOGO-Sing-UP.png' alt='not found'/>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>
+
+
+<script>
+	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
+
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});
+	function password_show_hide() {
+	var x = document.getElementById("password");
+	var show_eye = document.getElementById("show_eye");
+	var hide_eye = document.getElementById("hide_eye");
+	hide_eye.classList.remove("d-none");
+	if (x.type === "password") {
+		x.type = "text";
+		show_eye.style.display = "none";
+		hide_eye.style.display = "block";
+	} else {
+		x.type = "password";
+		show_eye.style.display = "block";
+		hide_eye.style.display = "none";
+	}
+	}
+
+	function password_show_hide2() {
+	var x = document.getElementById("password1");
+	var show_eye = document.getElementById("show_eye1");
+	var hide_eye = document.getElementById("hide_eye1");
+	hide_eye.classList.remove("d-none");
+	if (x.type === "password") {
+		x.type = "text";
+		show_eye.style.display = "none";
+		hide_eye.style.display = "block";
+	} else {
+		x.type = "password";
+		show_eye.style.display = "block";
+		hide_eye.style.display = "none";
+	}
+	}
+
+</script>
 
 
 <?php include $tpl . 'footer.php';?> 

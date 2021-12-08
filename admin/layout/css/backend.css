@@ -204,9 +204,11 @@ hr{
     color:#5e5e5e;
 }
 
-.fa-plus, .fa-pen ,.fa-trash{
+.fa-plus, .fa-pen ,.fa-trash, .fa-check{
 	color:#fff !important;
 }
+
+
 
 .buttont1 {
 	border: 1px solid #FF4B2B;
@@ -251,6 +253,17 @@ hr{
 
 .link:hover{
     color: #f75959;
+}
+
+a{
+	color: #333;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.active{
+	color: #f75959 !important;
+	font-weight: 700;
 }
 
 
@@ -326,8 +339,6 @@ hr{
 
 .card{
 	margin-top : 10px;
-	margin-right:10px;
-	margin-left:10px;
 	padding-right: 0px !important;
 	padding-left:0px !important;
 }
@@ -348,7 +359,7 @@ hr{
 	margin-right:20% !important;
 	padding-right:35px !important;
 	padding-left:35px !important;
-	height: 58vh;
+	height: 60vh;
 	width:60% !important;
 	border : solid 1px rgb(212, 212, 212);
 }
@@ -357,6 +368,9 @@ hr{
 	padding-top:10px;
 }
 
+.btn-info{
+	margin-left:5px !important;
+}
 
 .btn-primary{
 	border: 1px solid #FF4B2B !important;
@@ -394,4 +408,15 @@ thead{
 }
 
 /*End Member design*/
+
+
+
+.ordering{
+	margin-bottom:15px;
+}
+
+.asc{
+	margin-right:20px;
+}
+
 

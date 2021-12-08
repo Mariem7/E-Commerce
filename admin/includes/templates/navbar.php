@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-white rounded">
   <div class="container-fluid">
 
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="dashboard.php">
       <img class="logo" src='images/logo.png' alt='not found'/>
   </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,13 +13,13 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
       <li class="nav-item">
-        <a class="nav-link" href="#"><?php echo lang('HOME_ADMIN')?></a>
+        <a class="nav-link" href="dashboard.php"><?php echo lang('HOME_ADMIN')?></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><?php echo lang('CATEGORIES')?></a>
+        <a class="nav-link" href="categories.php"><?php echo lang('CATEGORIES')?></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><?php echo lang('ITEMES')?></a>
+        <a class="nav-link" href="items.php"><?php echo lang('ITEMES')?></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="members.php"><?php echo lang('MEMBERS')?></a>

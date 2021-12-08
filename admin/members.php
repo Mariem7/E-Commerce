@@ -27,8 +27,13 @@ if (isset($_SESSION['username'])){
     if($do =='Manage'){
      //Start the Manage Page   
        
+        // This will help us to create the pending page (users not activated)
+        $query ='';
+        if (isset($_GET['page']) && $_GET['page'] == 'Pending'){
+            $query = 'AND regStatus =0';
+        }
         //select only users (not admins)
-        $stmt = $con->prepare("SELECT * FROM USERS WHERE groupID !=1");
+        $stmt = $con->prepare("SELECT * FROM USERS WHERE groupID !=1 $query");
         $stmt->execute();
         $rows = $stmt -> fetchAll();
 
@@ -60,7 +65,11 @@ if (isset($_SESSION['username'])){
                             echo "<td>". $row['fullname'] ."</td>";
                             echo "<td>". $row['date'] ."</td>";
                             echo "<td><a href ='members.php?do=Edit&userid=" . $row["userID"] . "' class='btn btn-success'><i class='fas fa-pen'></i></a>
-                            <a href ='members.php?do=Delete&userid=" . $row["userID"] . "' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-trash'></i></a></td>";
+                            <a href ='members.php?do=Delete&userid=" . $row["userID"] . "' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-trash'></i></a>";
+                            if ($row['regStatus'] == 0){
+                                echo "<a href ='members.php?do=Activate&userid=" . $row["userID"] . "' class='btn btn-info'><i class='fas fa-check'></i></a>";
+                            }
+                            echo"</td>";
                             echo "</tr>";
                         }
                     ?>
@@ -193,11 +202,11 @@ if (isset($_SESSION['username'])){
                 }else{
 
                 //Insert the form fields into the database
-                $stmt = $con ->prepare("INSERT INTO users(username, password, email, fullname, date) VALUES(:zuser, :zpass, :zmail, :zname, now())");
+                $stmt = $con ->prepare("INSERT INTO users(username, password, email, fullname,regStatus, date) VALUES(:zuser, :zpass, :zmail, :zname,1, now())");
                 $stmt->execute(array('zuser' => $user, 'zpass' => $hashPass, 'zmail' => $email,'zname' => $name, ));
 
                 $theMsg = "<div class='alert alert-success'>" . $stmt->rowCount() . ' Record Inserted </div>';
-                redirectHome($theMsg, 'back');
+                redirectHome($theMsg);
             }
         }
 
@@ -373,6 +382,26 @@ if (isset($_SESSION['username'])){
             $stmt->bindParam(":zuser", $userid);
             $stmt->execute();
             $theMsg = "<div class='alert alert-success'>" . $stmt->rowCount() . ' Record Deleted </div>';
+            redirectHome($theMsg);
+            }else{
+                $theMsg = "<div class='alert alert-danger'>This ID doesn't exist</div>";
+                redirectHome($theMsg);
+            }
+        echo "</div>";
+    }elseif ($do == 'Activate'){
+
+        echo"<div class='container2 shadow-sm bg-white rounded'>";
+            echo "<h2>Activate Member</h2>";
+            //for the security (we need to verify that the id in the url is a number not a string)
+            $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid']) : 0;
+
+            //check if this user exists in database
+            $check = checkItem('userId','users', $userid);
+
+            if ($check > 0){
+            $stmt = $con->prepare("UPDATE users SET regStatus = 1 WHERE userID =  ?");
+            $stmt->execute(array($userid));
+            $theMsg = "<div class='alert alert-success'>" . $stmt->rowCount() . ' Record Activated </div>';
             redirectHome($theMsg);
             }else{
                 $theMsg = "<div class='alert alert-danger'>This ID doesn't exist</div>";

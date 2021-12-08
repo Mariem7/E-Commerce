@@ -11,7 +11,7 @@ function getTitle(){
     }
 }
 
-/*Redirect function [this funtion accept parameters]
+/*Redirect function [this funtion accept parameters] v2.0
 **$theMsg = echo the message [Error | Success | Warning]
 **$url = the link you want to redirect to
 **$seconds = seconds before redirecting
@@ -39,8 +39,8 @@ function redirectHome($theMsg, $url = null, $seconds=3){
 }
 
 /*
-** Check items Function
-** Function to check item in database [function accept parameters]
+** Check items Function v1.0
+** Function to check item in database [function accept parameters] 
 **$select = the item to select [Example: user, item, category]
 **$from = the table to select from [Example: users, items, categories]
 **$value= the value of select [Example: Maryem, box, electronics]
@@ -53,6 +53,48 @@ function checkItem($select, $from, $value){
     $count = $statement->rowCount();
     return $count;
 }
+
+
+
+/*
+**Count Number of Items Function v1.0
+**Function To Count of Items Rows
+**$item = The Item To Count
+**$table = The table To choose From
+*/
+
+function countItems($item, $table){
+    global $con;
+    $stmt2 = $con->prepare("SELECT COUNT($item) from $table");
+    $stmt2->execute();
+    return $stmt2->fetchColumn();
+}
+
+
+/*
+**Get Lastest Records Function v1.0
+**Function To Get the Latest Items From Database [Users, Items, Comments]
+**$select =  Field To Select
+**$table = The table To choose From
+**$limit = Number Of the Records To Get
+**$order = the id that wil will order the record from
+*/
+
+function getLatest($select, $table,$order, $limit=5){
+    global $con;
+    $getstmt = $con->prepare("SELECT $select from $table ORDER BY $order DESC LIMIT $limit");
+    $getstmt->execute();
+    return $getstmt->fetchAll();
+}
+
+
+
+
+
+
+
+
+
 
 
 ?>

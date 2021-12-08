@@ -1,4 +1,8 @@
 <?php 
+
+//the solution of the error of :Header already sent
+ob_start(); //Output Buffering Start (buffreing all the output in the memory (except the header))
+
 //start the session
 session_start();
 if (isset($_SESSION['username'])){
@@ -6,30 +10,38 @@ if (isset($_SESSION['username'])){
     //the title of the page
     $pageTitle='Dashboard';
     include 'init.php'; 
+
+
      /*Start the Dashboard Page*/?>
 
-    <div class="container3 home-stats">
+    <div class="container-lg home-stats">
         <h4>Dashboard</h4>
         <div class="row text-center">
 
             <div class="col-md-3">
-                <div class="stat shadow-sm">
-                    Total Members
-                    <span>200</span>
-                </div>
+                <a href ="members.php" class="link">
+                    <div class="stat shadow-sm">
+                        Total Members
+                        <span><?php echo countItems('userId','users')?></span>
+                    </div>
+                </a>
             </div>
 
             <div class="col-md-3">
                 <div class="stat shadow-sm">
+                <a href ="members.php?do=Manage&page=Pending" class="link">
                     Pending Members
-                    <span>400</span>
+                    <span><?php echo checkItem("regStatus", "users", 0) ?></span>
+                </a>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="stat shadow-sm">
+                <a href ="items.php" class="link">
                     Total Items
-                    <span>210</span>
+                    <span><?php echo countItems('item_ID','items')?></span>
+                </a>
                 </div>
             </div>
 
@@ -41,16 +53,22 @@ if (isset($_SESSION['username'])){
             </div>
    
 
-                <div class="card col-md-6">
+                <div class="card col-md-5" style="width: 40rem;">
+                <?php $latestusers =5; ?> 
                     <div class="card-header">
-                        <i class="fas fa-users"></i> Latest Registered Users
+                        <i class="fas fa-users"></i> Latest <?php echo $latestusers?> Registered Users
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Test</li>
+                        <?php 
+                          $theLatest = getLatest("*","users","userID",$latestusers);
+                          foreach($theLatest as $user){
+                              echo '<li class="list-group-item">' .  $user['username'] . '</li>';
+                          }
+                        ?>
                     </ul>
                 </div>
 
-                <div class="card col-md-6">
+                <div class="card col-md-5" style="margin-left: 15px; width: 40rem;">
                     <div class="card-header">
                         <i class="fas fa-tag"></i> Latest Items
                     </div>
@@ -72,4 +90,6 @@ if (isset($_SESSION['username'])){
     header('Location: index.php');
     exit();
 }
+
+ob_end_flush(); //send the output of the page
 ?>

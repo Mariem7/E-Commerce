@@ -11,7 +11,6 @@ if (isset($_SESSION['username'])){
     $pageTitle='Dashboard';
     include 'init.php'; 
 
-
      /*Start the Dashboard Page*/?>
 
     <div class="container-lg home-stats">
@@ -53,7 +52,7 @@ if (isset($_SESSION['username'])){
             </div>
    
 
-                <div class="card col-md-5" style="width: 40rem;">
+                <div class="card col-md-5" style="width: 40rem; margin-right:30px;">
                 <?php $latestusers =5; ?> 
                     <div class="card-header">
                         <i class="fas fa-users"></i> Latest <?php echo $latestusers?> Registered Users
@@ -68,7 +67,7 @@ if (isset($_SESSION['username'])){
                     </ul>
                 </div>
 
-                <div class="card col-md-5" style="margin-left: 15px; width: 40rem;">
+                <div class="card col-md-5" style="width: 40rem;">
                     <div class="card-header">
                         <i class="fas fa-tag"></i> Latest Items
                     </div>

@@ -42,55 +42,48 @@ if (isset($_SESSION['username'])){
         ?>
         <!--The manage page -->
 
-        <div class="container2 shadow-sm bg-white rounded">
-            <div>
+        <div class="container-lg shadow-sm bg-white rounded">
                 <h3>Manage Categories</h3>
-            </div>
                 <div class="ordering">
                     Ordering: 
                     <a href="?sort=ASC" class="<?php if($sort == 'ASC'){echo 'active';}?>">ASC</a>
                     <a href="?sort=DESC" class="<?php if($sort == 'DESC') {echo 'active';}?>">DESC</a>
                 </div>
-            <div class="table-responsive">
-                <table class="table table-bordered text-center shadow-sm bg-white rounded">
-                    <thead>
-                     <tr>
-                        <td>#ID</td>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Ordering</td>
-                        <td>Visibility</td>
-                        <td>Allow Comments</td>
-                        <td>Allow Ads</td>
-                        <td>Control</td>
-                    </tr>   
-                    </thead>
-                    
-                    <?php
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                        <?php
+                        $i=0;
                         foreach($cats as $cat){
-                            echo "<tr>";
-                            echo "<td>". $cat['categoryID'] ."</td>";
-                            echo "<td>". $cat['name'] ."</td>";
-                            if($cat['description'] == ''){
-                                echo "<td>This category has no description</td>";
-                            }else{
-                                echo "<td>". $cat['description'] ."</td>";
-                            }
+                            $i++;
+                            echo "<button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#" . $i ."' aria-expanded='true' aria-controls='" . $i . "'>". $cat['name'] ."</button>";
+                            echo"</h2>";
                             
-                            echo "<td>". $cat['ordering'] ."</td>";
-                            echo "<td>". $cat['visibility'] ."</td>";
-                            echo "<td>". $cat['allow_comments'] ."</td>";
-                            echo "<td>". $cat['allow_ads'] ."</td>";
-                            echo "<td><a href ='categories.php?do=Edit&catid=" . $cat["categoryID"] . "' class='btn btn-success'><i class='fas fa-pen'></i></a>
+                            echo"<div id='" . $cat['categoryID'] . "' class='accordion-collapse collapse show' aria-labelledby='" . $i . "' data-bs-parent='#accordionExample'>";
+                                echo"<div class='accordion-body'>";
+
+                                    if($cat['description'] == ''){
+                                        echo "<h5>This category has no description</h5>";
+                                    }else{
+                                        echo "<h5>". $cat['description'] ."</h5>";
+                                    }
+                            
+                            echo "<h5>". $cat['ordering'] ."</h5>";
+                            echo "<h5>". $cat['visibility'] ."</>";
+                            echo "<h5>". $cat['allow_comments'] ."</h5>";
+                            echo "<h5>". $cat['allow_ads'] ."</h5>";
+                            echo "<span><a href ='categories.php?do=Edit&catid=" . $cat["categoryID"] . "' class='btn btn-success'><i class='fas fa-pen'></i></a>
                             <a href ='categories.php?do=Delete&catid=" . $cat["categoryID"] . "' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-trash'></i></a>";
-                            echo"</td>";
-                            echo "</tr>";
+                            echo"</div>";
+                            echo"</div>";
                         }
                     ?>
-                </table>
-            </div>
+                    </div>
+                </div>
 
             <a href="categories.php?do=Add" class="btn btn-secondary"><i class="fas fa-plus"></i> Add New Category</a>     
+        </div>
+    </div>
 
             
             <!-- Modal for the confirm of the user's delete-->
